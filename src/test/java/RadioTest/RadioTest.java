@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 public class RadioTest {
 
     @Test
-    public void shouldSetStation() {
+    public void shouldSetStation() { // Выставляет номер радиостанции
         Radio rad = new Radio();
 
         rad.setStationNumber(10);
@@ -32,7 +32,7 @@ public class RadioTest {
 
 
     @Test
-    public void shouldToStationNumber() {
+    public void shouldToStationNumber() { // Выставляет радиостанцию вручную (корректное значение)
         Radio rad = new Radio();
 
         rad.setStationNumber(15);
@@ -44,7 +44,7 @@ public class RadioTest {
     }
 
     @Test
-    public void shouldToNextStation() {
+    public void shouldToNextStation() { // Следующая радиостанция (корректное значение)
         Radio rad = new Radio();
         rad.setStationNumber(7);
 
@@ -57,7 +57,7 @@ public class RadioTest {
     }
 
     @Test
-    public void shouldToZeroStation() {
+    public void shouldToZeroStation() { // Верхнее граничное значение радиостанции при переключении вперед
         Radio rad = new Radio();
         rad.setStationNumber(9);
 
@@ -70,7 +70,7 @@ public class RadioTest {
     }
 
     @Test
-    public void shouldToPreviousStation() {
+    public void shouldToPreviousStation() { // Переключение радиостанции на предыдущую
         Radio rad = new Radio();
         rad.setStationNumber(5);
 
@@ -83,7 +83,7 @@ public class RadioTest {
     }
 
     @Test
-    public void shouldToNineStation() {
+    public void shouldToNineStation() { // Нижнее граничное значение радиостанции при переключении назад
         Radio rad = new Radio();
         rad.setStationNumber(0);
 
@@ -96,7 +96,7 @@ public class RadioTest {
     }
 
     @Test
-    public void shouldSetVolume() {
+    public void shouldSetVolume() { // Выставляет уровень звука
         Radio rad = new Radio();
 
         rad.setVolume(10);
@@ -108,20 +108,20 @@ public class RadioTest {
     }
 
     @Test
-    public void shouldToStayTen() {
+    public void shouldToStayTen() { // Верхнее значение громкости при ее прибавлении
         Radio rad = new Radio();
-        rad.setVolume(10);
+        rad.setVolume(100);
 
         rad.increaseVolume();
 
-        int expected = 10;
+        int expected = 100;
         int actual = rad.getVolume();
 
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
-    public void shouldToUpVolume() {
+    public void shouldToUpVolume() { // Увеличение громкости
         Radio rad = new Radio();
         rad.setVolume(7);
 
@@ -134,7 +134,7 @@ public class RadioTest {
     }
 
     @Test
-    public void shouldToDecreaseVolume() {
+    public void shouldToDecreaseVolume() { // Уменьшение громкости
         Radio rad = new Radio();
         rad.setVolume(1);
 
@@ -147,7 +147,7 @@ public class RadioTest {
     }
 
     @Test
-    public void shouldToStayZeroVolume() {
+    public void shouldToStayZeroVolume() { // Уменьшение громкости при минимальном ее значении
         Radio rad = new Radio();
         rad.setVolume(0);
 
@@ -160,10 +160,10 @@ public class RadioTest {
     }
 
     @Test
-    public void shouldToVolume() {
+    public void shouldToVolume() { // Выставляет уровень звука
         Radio rad = new Radio();
 
-        rad.setVolume(11);
+        rad.setVolume(101);
 
         int expected = 0;
         int actual = rad.getVolume();
@@ -181,6 +181,22 @@ public class RadioTest {
         int actual = rad.getVolume();
 
         Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testRadioStationNumber() {
+        Radio rad = new Radio(26);
+
+        Assertions.assertEquals(25, rad.getMaxStationNumber());
+        Assertions.assertEquals(0, rad.getMinStationNumber());
+    }
+
+    @Test
+    public void testVolume() {
+        Radio rad = new Radio();
+
+        Assertions.assertEquals(0, rad.getMinVolume());
+        Assertions.assertEquals(100, rad.getMaxVolume());
     }
 
 }
